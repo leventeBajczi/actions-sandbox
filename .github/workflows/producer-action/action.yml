@@ -12,7 +12,9 @@ runs:
     - name: Create file if missing
       if: steps.cache.outputs.cache-hit != 'true'
       run: touch a.txt
+      shell: bash
     
     - name: List file if exists
       if: steps.cache.outputs.cache-hit == 'true'
       run: ls -l a.txt
+      shell: bash
