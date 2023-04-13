@@ -1,0 +1,15 @@
+name: Consumer1
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call:
+    uses: ./.github/workflows/producer.yml
+    
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: list files
+        run: ls . -R
