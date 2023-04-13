@@ -1,0 +1,12 @@
+name: Producer
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create a file
+        run: touch a.txt 
