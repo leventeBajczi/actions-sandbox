@@ -8,6 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3.5.1
-      - uses: ./.github/workflows/producer.yml
+      - uses: ./.github/workflows/producer-action
       - name: list files
         run: ls . -R
