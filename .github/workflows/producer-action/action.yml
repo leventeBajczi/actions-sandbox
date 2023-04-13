@@ -3,5 +3,16 @@ description: 'Creates a file in a reusable fashion'
 runs:
   using: "composite"
   steps:
-    - run: touch a.txt
-      shell: bash
+    - uses: actions/cache@v3
+      id: cache
+      with:
+        path: .
+        key: ${{ github.sha }}-a.txt
+
+    - name: Create file if missing
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: touch a.txt
+    
+    - name: List file if exists
+      if: steps.cache.outputs.cache-hit == 'true'
+      run: ls -l a.txt
