@@ -1,0 +1,7 @@
+name: 'Producer (Local Action)'
+description: 'Creates a file in a reusable fashion'
+runs:
+  using: "composite"
+  steps:
+    - run: touch a.txt
+      shell: bash
