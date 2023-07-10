@@ -1,0 +1,11 @@
+name: mac ssh
+
+on:
+  workflow_dispatch:
+
+jobs:    
+  ssh:
+    runs-on: macos-latest
+    steps:
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
