@@ -1,0 +1,28 @@
+name: gitlab-runner
+
+on:
+  workflow_dispatch:
+    inputs:
+      token:
+        required: true
+
+jobs:    
+  ssh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install deps
+        run: |
+          curl -L "https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh" | sudo bash
+          sudo apt-get install gitlab-runner
+      - name: Register
+        run: |
+          sudo gitlab-runner register \
+          --non-interactive \
+          --url "https://gitlab.com/" \
+          --token "${{ inputs.token }}" \
+          --executor "docker" \
+          --docker-image alpine:latest \
+          --description "docker-runner"
+      - name: Run
+        run: |
+          sudo gitlab-runner run
