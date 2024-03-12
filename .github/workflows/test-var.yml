@@ -1,0 +1,27 @@
+name: test var
+
+on:
+  workflow_dispatch:
+
+jobs:    
+  ssh:
+    runs-on: macos-latest
+    steps:
+      - name: Creating versions
+        id: 'value'
+        shell: bash
+        run: |
+          export message=$(printf "InputMessage\n\nModified subprojects (since lasttag):\nsubprojects")
+          echo Message: $message
+          echo "version=5.0.2" >> $GITHUB_OUTPUT
+          echo "tagname=v5.0.2" >> $GITHUB_OUTPUT
+          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+          echo "message<<$EOF" >> $GITHUB_OUTPUT
+          echo $message >> $GITHUB_OUTPUT
+          echo "$EOF" >> $GITHUB_OUTPUT
+      - name: Verify variables
+        shell: bash
+        run: |
+          echo version "${{steps.value.outputs.version}}"
+          echo tagname "${{steps.value.outputs.tagname}}"
+          echo message "${{steps.value.outputs.message}}"
